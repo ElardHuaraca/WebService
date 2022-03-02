@@ -10,7 +10,7 @@ namespace Data
 {
     static class SQLHelper
     {
-        public static string Connection { get; } = "Data Source=ELARD\\SQLEXPRESS;" +
+        public static string Connection { get; } = "Data Source=Elard;" +
           "Initial Catalog=Prueba;Integrated Security=true;";
 
         public static Int32 ExecuteNonQuery(String connectionString, String commandText,
@@ -21,7 +21,10 @@ namespace Data
                 using (SqlCommand cmd = new SqlCommand(commandText, conn))
                 {
                     cmd.CommandType = commandType;
-                    cmd.Parameters.AddRange(parameters);
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters);
+                    }
 
                     conn.Open();
                     return cmd.ExecuteNonQuery();
@@ -38,7 +41,10 @@ namespace Data
                 using (SqlCommand cmd = new SqlCommand(commandText, conn))
                 {
                     cmd.CommandType = commandType;
-                    cmd.Parameters.AddRange(parameters);
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters);
+                    }
 
                     conn.Open();
                     return cmd.ExecuteScalar();
@@ -54,7 +60,10 @@ namespace Data
             using (SqlCommand cmd = new SqlCommand(commandText, conn))
             {
                 cmd.CommandType = commandType;
-                cmd.Parameters.AddRange(parameters);
+                if (parameters != null)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
 
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);

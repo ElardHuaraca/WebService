@@ -10,15 +10,14 @@ namespace Data
     {
         public List<Product> listProductsActivate()
         {
-            SqlParameter[] parameters = null;
             string comandText = string.Empty;
             List<Product> products = null;
             try
             {
-                comandText = "USP_ListProductDesactivate";
+                comandText = "USP_ListProduct";
                 products = new List<Product>();
                 using (SqlDataReader reader = SQLHelper.ExecuteReader(SQLHelper.Connection, comandText,
-                    CommandType.StoredProcedure, parameters))
+                    CommandType.StoredProcedure))
                 {
                     while (reader.Read())
                     {
@@ -48,7 +47,7 @@ namespace Data
             List<Product> products = null;
             try
             {
-                comandText = "USP_ListProduct";
+                comandText = "USP_DesactiveProduct";
                 products = new List<Product>();
                 using (SqlDataReader reader = SQLHelper.ExecuteReader(SQLHelper.Connection, comandText,
                     CommandType.StoredProcedure, parameters))
@@ -82,13 +81,13 @@ namespace Data
             {
                 comandText = "USP_InsertProduct";
                 parameters = new SqlParameter[4];
-                parameters[0] = new SqlParameter("productName", SqlDbType.VarChar);
+                parameters[0] = new SqlParameter("@productName", SqlDbType.VarChar);
                 parameters[0].Value = product.ProductName;
-                parameters[1] = new SqlParameter("productInventory", SqlDbType.Int);
+                parameters[1] = new SqlParameter("@productInventory", SqlDbType.Int);
                 parameters[1].Value = product.ProductInventory;
-                parameters[2] = new SqlParameter("productExpiration", SqlDbType.Date);
+                parameters[2] = new SqlParameter("@productExpiration", SqlDbType.Date);
                 parameters[2].Value = product.ProductExpiration;
-                parameters[3] = new SqlParameter("productRegistered", SqlDbType.DateTime);
+                parameters[3] = new SqlParameter("@productRegistered", SqlDbType.DateTime);
                 parameters[3].Value = product.ProductRegistered;
                 SQLHelper.ExecuteNonQuery(SQLHelper.Connection, comandText, CommandType.StoredProcedure, parameters);
             }
@@ -145,15 +144,15 @@ namespace Data
             {
                 comandText = "USP_UpdateProduct";
                 parameters = new SqlParameter[5];
-                parameters[0] = new SqlParameter("productID", SqlDbType.Int);
+                parameters[0] = new SqlParameter("@productID", SqlDbType.Int);
                 parameters[0].Value = product.ProductID;
-                parameters[1] = new SqlParameter("productName", SqlDbType.VarChar);
+                parameters[1] = new SqlParameter("@productName", SqlDbType.VarChar);
                 parameters[1].Value = product.ProductName;
-                parameters[2] = new SqlParameter("productInventory", SqlDbType.Int);
+                parameters[2] = new SqlParameter("@productInventory", SqlDbType.Int);
                 parameters[2].Value = product.ProductInventory;
-                parameters[3] = new SqlParameter("productExpiration", SqlDbType.Date);
+                parameters[3] = new SqlParameter("@productExpiration", SqlDbType.Date);
                 parameters[3].Value = product.ProductExpiration;
-                parameters[4] = new SqlParameter("productRegistered", SqlDbType.DateTime);
+                parameters[4] = new SqlParameter("@productRegistered", SqlDbType.DateTime);
                 parameters[4].Value = product.ProductRegistered;
                 SQLHelper.ExecuteNonQuery(SQLHelper.Connection, comandText, CommandType.StoredProcedure, parameters);
             }
