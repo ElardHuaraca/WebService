@@ -8,7 +8,40 @@ namespace Data
 {
     public class DProduct
     {
-        public List<Product> listProducts()
+        public List<Product> listProductsActivate()
+        {
+            SqlParameter[] parameters = null;
+            string comandText = string.Empty;
+            List<Product> products = null;
+            try
+            {
+                comandText = "USP_ListProductDesactivate";
+                products = new List<Product>();
+                using (SqlDataReader reader = SQLHelper.ExecuteReader(SQLHelper.Connection, comandText,
+                    CommandType.StoredProcedure, parameters))
+                {
+                    while (reader.Read())
+                    {
+                        products.Add(new Product
+                        {
+                            ProductID = reader["productID"] == null ? 0 : Convert.ToInt32(reader["productID"]),
+                            ProductName = reader["productName"] == null ? string.Empty : Convert.ToString(reader["productName"]),
+                            ProductInventory = reader["productInventory"] == null ? 0 : Convert.ToInt32(reader["productInventory"]),
+                            ProductExpiration = reader["productExpiration"] == null ? DateTime.MinValue : Convert.ToDateTime(reader["productExpiration"]),
+                            ProductRegistered = reader["productRegistered"] == null ? DateTime.MinValue : Convert.ToDateTime(reader["productRegistered"])
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("listProducts exeption: " + ex);
+                throw ex;
+            }
+            return products;
+        }
+
+        public List<Product> listProductsDesactivate()
         {
             SqlParameter[] parameters = null;
             string comandText = string.Empty;
@@ -149,5 +182,7 @@ namespace Data
                 throw ex;
             }
         }
+
+
     }
 }
