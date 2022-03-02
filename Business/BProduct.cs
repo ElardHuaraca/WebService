@@ -63,6 +63,10 @@ namespace Business
                 result = false;
                 throw ex;
             }
+            finally
+            {
+                dProduct = null;
+            }
             return result;
         }
 
@@ -78,6 +82,10 @@ namespace Business
             {
                 result = false;
                 throw ex;
+            }
+            finally
+            {
+                dProduct = null;
             }
             return result;
         }
@@ -98,6 +106,10 @@ namespace Business
                 result = false;
                 throw ex;
             }
+            finally
+            {
+                dProduct = null;
+            }
             return result;
         }
 
@@ -117,6 +129,10 @@ namespace Business
                 result = false;
                 throw ex;
             }
+            finally
+            {
+                dProduct = null;
+            }
             return result;
         }
 
@@ -135,6 +151,10 @@ namespace Business
             {
                 result = false;
                 throw ex;
+            }
+            finally
+            {
+                dProduct = null;
             }
             return result;
         }
