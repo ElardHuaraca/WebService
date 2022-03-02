@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 
 namespace APIPrueba1DD.Controllers.api
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class ProductController : ApiController
     {
         private BProduct bProduct = new BProduct();
@@ -86,7 +88,7 @@ namespace APIPrueba1DD.Controllers.api
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
                 ProductInventory = product.ProductInventory,
-                ProductExpiration = DateTime.Parse(product.ProductExpiration,culture),
+                ProductExpiration = DateTime.Parse(product.ProductExpiration, culture),
                 ProductRegistered = DateTime.Parse(product.ProductRegistered, culture)
             });
             if (!result)
@@ -96,7 +98,7 @@ namespace APIPrueba1DD.Controllers.api
             return Ok();
         }
 
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(string))]
         public IHttpActionResult PutProductDesactivate(int id)
         {
             bool result = bProduct.UpdateProductDesactivate(id);
