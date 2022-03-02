@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    internal class Product
+    public class Product
     {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public int ProductInventory { get; set; }
+        public DateTime ProductExpiration { get; set; }
+        public DateTime ProductRegistered { get; set; }
+
     }
 }
