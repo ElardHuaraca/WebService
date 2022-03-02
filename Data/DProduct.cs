@@ -47,7 +47,7 @@ namespace Data
             List<Product> products = null;
             try
             {
-                comandText = "USP_DesactiveProduct";
+                comandText = "USP_ListProductDesactivate";
                 products = new List<Product>();
                 using (SqlDataReader reader = SQLHelper.ExecuteReader(SQLHelper.Connection, comandText,
                     CommandType.StoredProcedure, parameters))

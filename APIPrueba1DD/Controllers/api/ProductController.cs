@@ -2,6 +2,7 @@
 using Business;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -11,6 +12,7 @@ namespace APIPrueba1DD.Controllers.api
     public class ProductController : ApiController
     {
         private BProduct bProduct = new BProduct();
+        private CultureInfo culture = new CultureInfo("es-ES");
 
         [ResponseType(typeof(List<Product>))]
         public IHttpActionResult GetProductActivate()
@@ -56,8 +58,8 @@ namespace APIPrueba1DD.Controllers.api
             {
                 ProductName = product.ProductName,
                 ProductInventory = product.ProductInventory,
-                ProductExpiration = DateTime.ParseExact(product.ProductExpiration, "MM/dd/yyyy", null),
-                ProductRegistered = DateTime.ParseExact(product.ProductRegistered, "MM/dd/yyyy HH:mm:ss", null)
+                ProductExpiration = DateTime.Parse(product.ProductExpiration, culture),
+                ProductRegistered = DateTime.Now
             });
 
             if (!result)
@@ -65,7 +67,7 @@ namespace APIPrueba1DD.Controllers.api
                 return NotFound();
             }
 
-            return Ok(result);
+            return Ok(product);
         }
 
         [ResponseType(typeof(void))]
@@ -84,8 +86,8 @@ namespace APIPrueba1DD.Controllers.api
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
                 ProductInventory = product.ProductInventory,
-                ProductExpiration = DateTime.ParseExact(product.ProductExpiration, "MM/dd/yyyy", null),
-                ProductRegistered = DateTime.ParseExact(product.ProductRegistered, "MM/dd/yyyy HH:mm:ss", null)
+                ProductExpiration = DateTime.Parse(product.ProductExpiration,culture),
+                ProductRegistered = DateTime.Parse(product.ProductRegistered, culture)
             });
             if (!result)
             {
